@@ -135,7 +135,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified on October 15, 2026 12:15:18 Eastern Daylight Time</p>
+      <p class="date">Last modified on October 15, 2026 15:46:41 Eastern Daylight Time</p>
     </div>
   </div>
   
@@ -1200,7 +1200,11 @@ Figure&nbsp;3: Simulated sampling distribution of p_hat based on samples of size
 <div id="callout-44" class="callout-44-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">84</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>n600_1000rep <span class="ot">&lt;-</span> gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">600</span>, <span class="at">reps =</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1231,7 +1235,23 @@ Figure&nbsp;3: Simulated sampling distribution of p_hat based on samples of size
 <div id="callout-46" class="callout-46-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>ques14 <span class="ot">&lt;-</span> n600_1000rep <span class="sc">|&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">p_hat =</span> <span class="fu">mean</span>(marital <span class="sc">==</span> <span class="st">"Divorced"</span>))</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ques14)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  replicate p_hat
+      &lt;int&gt; &lt;dbl&gt;
+1         1 0.172
+2         2 0.188
+3         3 0.145
+4         4 0.145
+5         5 0.133
+6         6 0.148</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1262,7 +1282,16 @@ Figure&nbsp;3: Simulated sampling distribution of p_hat based on samples of size
 <div id="callout-48" class="callout-48-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and answers below</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and answers below</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>ques15 <span class="ot">&lt;-</span> ques14 <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>( <span class="at">mean_sampling_dist =</span> <span class="fu">mean</span>(p_hat), <span class="at">standard_error =</span> <span class="fu">sd</span>(p_hat))</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>ques15</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_sampling_dist standard_error
+               &lt;dbl&gt;          &lt;dbl&gt;
+1              0.158         0.0143</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1293,7 +1322,7 @@ Figure&nbsp;3: Simulated sampling distribution of p_hat based on samples of size
 <div id="callout-50" class="callout-50-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>There was more variability from sample to sample when using a sample size of 𝑛 = 50. The reason is a samller sample size(𝑛 = 50) has a smaller denominator and produces a larger standard error.</li>
 </ul>
 </div>
 </div>
@@ -1324,10 +1353,25 @@ Figure&nbsp;3: Simulated sampling distribution of p_hat based on samples of size
 <div id="callout-52" class="callout-52-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>The sampling distribution built on 𝑛 = 600 will have a more normal(symmetrical) looking distribution. The reason is the Central Limit Theorem, as the sample size(𝑛) increases the sampling distribution of a sample proportion becomes closer to a normal, symmetric bell curve. .</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments below</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments below</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ques14, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sampling Distribution of p_hat (n = 600)"</span>,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sampling Proportions (p_hat)"</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="PS07_source_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1354,12 +1398,12 @@ Figure&nbsp;3: Simulated sampling distribution of p_hat based on samples of size
 <div class="callout-body-container callout-body">
 <p>Imagine we collected only a single small sample of 15 respondents as given from the code below.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">53</span>)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>n15_1rep <span class="ot">&lt;-</span> gss_YEAR <span class="sc">|&gt;</span> </span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">reps =</span> <span class="dv">1</span>)</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>n50_1rep <span class="ot">&lt;-</span> gss_YEAR <span class="sc">|&gt;</span> </span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">53</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>n15_1rep <span class="ot">&lt;-</span> gss_YEAR <span class="sc">|&gt;</span> </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">reps =</span> <span class="dv">1</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>n50_1rep <span class="ot">&lt;-</span> gss_YEAR <span class="sc">|&gt;</span> </span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Following the example from the beginning of the Problem Set (roughly line 138), estimate the <strong>sample proportion</strong> <span class="math inline">\(\hat{p}\)</span> of people who identified as <code>Divorced</code> based on <code>n15_1rep</code>… AS WELL AS the <strong>standard error of</strong> <span class="math inline">\(\hat{p}\)</span>.</p>
 </div>
@@ -1377,7 +1421,15 @@ Figure&nbsp;3: Simulated sampling distribution of p_hat based on samples of size
 <div id="callout-54" class="callout-54-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Type your code and comments inside the code chunk</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>n15_1rep <span class="sc">|&gt;</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">p_hat =</span> <span class="fu">mean</span>(marital <span class="sc">==</span> <span class="st">"Divorced"</span>), <span class="at">SE_formula =</span> <span class="fu">sqrt</span>(p_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">/</span> <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  replicate p_hat SE_formula
+      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1         1 0.267      0.114</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1440,18 +1492,26 @@ Note
 <tbody>
 <tr class="odd">
 <td>15</td>
-<td>x</td>
-<td>a</td>
+<td>0.0951</td>
+<td>0.114</td>
 </tr>
 <tr class="even">
 <td>50</td>
-<td>y</td>
-<td>b</td>
+<td>0.0522</td>
+<td>0.0460</td>
 </tr>
 </tbody>
 </table>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code below</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code below</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>n50_1rep <span class="sc">|&gt;</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">p_hat =</span> <span class="fu">mean</span>(marital <span class="sc">==</span> <span class="st">"Divorced"</span>), <span class="at">SE_formula =</span> <span class="fu">sqrt</span>(p_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_hat) <span class="sc">/</span> <span class="dv">50</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  replicate p_hat SE_formula
+      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1         1  0.12     0.0460</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1482,7 +1542,7 @@ Note
 <div id="callout-59" class="callout-59-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Delete this and put your text answer here.</li>
+<li>If I collected a single sample from 600 respondents, the standard error will be <strong>smaller</strong> than the one we calculated for 𝑛 = 15. My reasoning is that as the sample size increases from 15 to 600, that is also increases our denominator in our standard error formula which in return decreases our standard error.</li>
 </ul>
 </div>
 </div>
@@ -1532,7 +1592,7 @@ Tip
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.6.1 (2026-06-24)
 Platform: x86_64-redhat-linux-gnu

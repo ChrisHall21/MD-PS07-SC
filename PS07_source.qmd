@@ -432,7 +432,10 @@ Use the `rep_sample_n` function to collect 1000 virtual samples of size $n = 600
 ::: {.callout-important icon="false" collapse="false" title="Problem 13 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
+set.seed(84)
 
+n600_1000rep <- gss_cat |>
+  rep_sample_n(size = 600, reps = 1000)
 ```
 :::
 
@@ -443,7 +446,11 @@ Calculate the proportion $\hat{p}$ of people who reported they were `Divorced`fo
 ::: {.callout-important icon="false" collapse="false" title="Problem 14 Answers"}
 ```{r}
 # Type your code and comments inside the code chunk
+ques14 <- n600_1000rep |>
+  group_by(replicate) |>
+  summarize(p_hat = mean(marital == "Divorced"))
 
+head(ques14)
 ```
 :::
 
@@ -454,6 +461,9 @@ Calculate the mean of the $n = 600$ sampling distribution, and the standard erro
 ::: {.callout-important icon="false" collapse="false" title="Problem 15 Answers"}
 ```{r}
 # Type your code and answers below
+ques15 <- ques14 |>
+summarize( mean_sampling_dist = mean(p_hat), standard_error = sd(p_hat))
+ques15
 ```
 :::
 
@@ -462,7 +472,7 @@ Was there more **variability** from sample to sample when we took a sample size 
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 16 Answers"}
--   Delete this and put your text answer here.
+-  There was more variability from sample to sample when using a sample size of 𝑛 = 50. The reason is a samller sample size(𝑛 = 50) has a smaller denominator and produces a larger standard error.
 :::
 
 ::: {.callout-note icon="false" title="Problem 17"}
@@ -470,11 +480,18 @@ Which sampling distribution looked more normally distributed (bell shaped and sy
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 17 Answers"}
--   Delete this and put your text answer here.
+-   The sampling distribution built on 𝑛 = 600 will have a more normal(symmetrical) looking distribution. The reason is the Central Limit Theorem, as the sample size(𝑛) increases the sampling distribution of a sample proportion becomes closer to a normal, symmetric bell curve. .
 
 ```{r, fig.height = 8}
 # Type your code and comments below
-
+ggplot(data = ques14, aes(x = p_hat)) +
+  geom_histogram(color = "white", fill = "steelblue", bins = 20) +
+  labs(
+    title = "Sampling Distribution of p_hat (n = 600)",
+    x = "Sampling Proportions (p_hat)",
+    y = "Count"
+  ) +
+  theme_minimal()
 ```
 :::
 
@@ -507,7 +524,8 @@ Following the example from the beginning of the Problem Set (roughly line 138), 
 ::: {.callout-important icon="false" collapse="false" title="Problem 18 Answers"}
 ```{r, label = "Test2"}
 # Type your code and comments inside the code chunk
-
+n15_1rep |>
+  summarize(p_hat = mean(marital == "Divorced"), SE_formula = sqrt(p_hat * (1 - p_hat) / 15))
 
 ```
 :::
@@ -527,12 +545,13 @@ Fill in the Markdown table below with all the standard errors you computed for t
 ::: {.callout-important icon="false" collapse="false" title="Problem 19 Answers"}
 | Sample size n | SE via sd of sampling distribution | SE via one sample and formula |
 |------------------|-----------------------------|-------------------------|
-| 15            | x                                  | a                             |
-| 50            | y                                  | b                             |
+| 15            | 0.0951                                  | 0.114                         |
+| 50            | 0.0522                                  | 0.0460                        |
 
 ```{r, label = "test3"}
 # Your code below
-
+n50_1rep |>
+  summarize(p_hat = mean(marital == "Divorced"), SE_formula = sqrt(p_hat * (1 - p_hat) / 50))
 ```
 :::
 
@@ -541,7 +560,7 @@ Based on what you observed for 19, **IF** you collected a single sample from 600
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 20 Answers"}
--   Delete this and put your text answer here.
+-   If I collected a single sample from 600 respondents, the standard error will be **smaller** than the one we calculated for 𝑛 = 15. My reasoning is that as the sample size increases from 15 to 600, that is also increases our denominator in our standard error formula which in return decreases our standard error.
 :::
 
 # Turning in Your Work
