@@ -178,7 +178,7 @@ Ask two of your classmates what their estimate of $\hat{p}$ was. How do the $\ha
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 1 Answers"}
--   Delete this and put your text answer here.
+-   Our values of p^ are similar but rarely identical.
 :::
 
 ::: {.callout-note icon="false" title="Problem 2"}
@@ -186,7 +186,7 @@ Ask two of your classmates what their estimate of $\hat{p}$ was. How do the $\ha
 :::
 
 ::: {.callout-important icon="false" collapse="false" title="Problem 2 Answers"}
--   Delete this and put your text answer here.
+-   The reason being is the **sampling variability(or sampling error)**. Since each student is taking a different random sample of 50 people and each sample contains a different unique group of individuals, each sample will naturally fluctuate .
 :::
 
 ## Estimating $\widehat{SE}$ from a Single Sample
